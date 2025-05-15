@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KALON FLEUR | Jewelry That Speaks the Unspoken</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #d4af7a;
+            --secondary: #7a6550;
+            --accent: #c97c5d;
+            --light: #f8f5f0;
+            --dark: #2c2420;
+            --text: #3a3a3a;
+            --text-light: #6e6e6e;
+            
+            /* Light mode default */
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f5f0;
+            --text-primary: var(--text);
+            --text-secondary: var(--text-light);
+            --border: rgba(120, 120, 120, 0.15);
+        }
+
+        .dark {
+            --bg-primary: #1c1917;
+            --bg-secondary: #292524;
+            --text-primary: #f8f5f0;
+            --text-secondary: #d1d1d1;
+            --border: rgba(255, 255, 255, 0.1);
+        }
+        
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        h1, h2, h3, h4, .serif {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        /* Custom styles */
+        .text-primary { color: var(--primary); }
+        .text-secondary { color: var(--secondary); }
+        .text-accent { color: var(--accent); }
+        
+        .bg-primary-custom { background-color: var(--primary); }
+        .bg-secondary-custom { background-color: var(--secondary); }
+        .bg-accent { background-color: var(--accent); }
+        .bg-light { background-color: var(--light); }
+        .bg-dark { background-color: var(--dark); }
+        .bg-section { background-color: var(--bg-secondary); }
+        
+        .border-custom { border-color: var(--border); }
+        
+        /* Hero section */
+        .hero {
+            background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1599643477877-530eb83abc8e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 90vh;
+        }
+        
+        /* Button styles */
+        .btn {
+            @apply px-8 py-3 rounded-md transition duration-300 transform hover:scale-105 focus:outline-none;
+        }
+        
+        .btn-primary {
+            @apply bg-primary-custom text-white hover:bg-opacity-90;
+        }
+        
+        .btn-secondary {
+            @apply bg-transparent border border-primary text-primary hover:bg-primary-custom hover:text-white;
+        }
+        
+        /* Card styles */
+        .card {
+            background-color: var(--bg-primary);
+            border: 1px solid var(--border);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Collection grid */
+        .collection-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            grid-auto-rows: minmax(200px, auto);
+            grid-gap: 20px;
+        }
+        
+        .collection-item-1 {
+            grid-column: span 8;
+            grid-row: span 2;
+        }
+        
+        .collection-item-2 {
+            grid-column: span 4;
+            grid-row: span 2;
+        }
+        
+        .collection-item-3 {
+            grid-column: span 6;
+            grid-row: span 2;
+        }
+        
+        .collection-item-4 {
+            grid-column: span 6;
+            grid-row: span 2;
+        }
+        
+        .ribbon-btn {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s;
+        }
+        
+        .ribbon-btn:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: var(--primary);
+            transition: all 0.5s;
+        }
+        
+        .ribbon-btn:hover:after {
+            left: 0;
+        }
+        
+        /* Navbar animation */
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: var(--primary);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover:after {
+            width: 100%;
+        }
+        
+        /* Card animation */
+        .value-card:hover .icon-container {
+            transform: translateY(-10px) rotate(5deg);
+        }
+        
+        .value-card:hover .value-title {
+            color: var(--primary);
+        }
+        
+        /* First letter styling for paragraphs */
+        .fancy-first-letter::first-letter {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5em;
+            font-weight: 700;
+            float: left;
+            margin-right: 6px;
+            line-height: 0.9;
+            color: var(--primary);
+        }
+        
+        /* Customization module */
+        .customization-preview {
+            background: url('https://images.unsplash.com/photo-1600721391776-b5cd0e9c4aa3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80') center/cover;
+            min-height: 300px;
+            position: relative;
+        }
+        
+        .customization-preview:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.3);
+        }
+        
+        /* Custom input */
+        .custom-input {
+            background-color: transparent;
+            border: none;
+            border-bottom: 2px solid var(--primary);
+            color: var(--text-primary);
+            font-size: 1.2rem;
+            padding: 10px 5px;
+            width: 100%;
+            transition: all 0.3s;
+        }
+        
+        .custom-input:focus {
+            outline: none;
+            border-bottom-color: var(--accent);
+        }
+        
+        /* Mobile optimizations */
+        @media (max-width: 768px) {
+            .collection-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .collection-item-1,
+            .collection-item-2,
+            .collection-item-3,
+            .collection-item-4 {
+                grid-column: span 1;
+                grid-row: span 1;
+            }
+            
+            .mobile-stack {
+                flex-direction: column;
+            }
+            
+            .mobile-full {
+                width: 100%;
+            }
+        }
+        
+        /* Dark mode toggle */
+        .mode-toggle {
+            position: relative;
+            width: 60px;
+            height: 30px;
+            background-color: var(--bg-secondary);
+            border-radius: 30px;
+            cursor: pointer;
+            padding: 3px;
+            transition: all 0.3s;
+        }
+        
+        .mode-toggle-circle {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            transition: transform 0.3s;
+        }
+        
+        .dark .mode-toggle-circle {
+            transform: translateX(30px);
+        }
+        
+        /* Product hover interactions */
+        .product-card {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .product-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: all 0.3s;
+            transform: translateY(20px);
+        }
+        
+        .product-card:hover .product-overlay {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .zoom-on-hover {
+            transition: transform 0.5s;
+        }
+        
+        .product-card:hover .zoom-on-hover {
+            transform: scale(1.1);
+        }
+        
+        /* Testimonial carousel */
+        .carousel-container {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .carousel-slide {
+            display: none;
+            animation: fadeEffect 1.5s;
+        }
+        
+        @keyframes fadeEffect {
+            from {opacity: 0.4}
+            to {opacity: 1}
+        }
+        
+        /* Logo animation */
+        .logo {
+            position: relative;
+        }
+        
+        .logo:hover::after {
+            content: 'κάλλος ἀεῖ';
+            position: absolute;
+            bottom: -15px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            font-size: 0.6em;
+            opacity: 0;
+            animation: fadeIn 0.5s forwards;
+        }
+        
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(5px);
+            }
+        }
+        
+        /* Flower visualization animation */
+        .flower-visualization {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            background-color: var(--bg-secondary);
+            overflow: hidden;
+        }
+        
+        .petal {
+            position: absolute;
+            width: 50px;
+            height: 80px;
+            background-color: var(--primary);
+            border-radius: 50px 50px 0 50px;
+            transform-origin: bottom center;
+            opacity: 0.8;
+            transition: all 0.5s;
+        }
+        
+        .petal:nth-child(1) { transform: translate(-50%, -50%) rotate(0deg) translateY(-40px); }
+        .petal:nth-child(2) { transform: translate(-50%, -50%) rotate(60deg) translateY(-40px); }
+        .petal:nth-child(3) { transform: translate(-50%, -50%) rotate(120deg) translateY(-40px); }
+        .petal:nth-child(4) { transform: translate(-50%, -50%) rotate(180deg) translateY(-40px); }
+        .petal:nth-child(5) { transform: translate(-50%, -50%) rotate(240deg) translateY(-40px); }
+        .petal:nth-child(6) { transform: translate(-50%, -50%) rotate(300deg) translateY(-40px); }
+        
+        .flower-center {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background-color: var(--accent);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+        }
+        
+        .flower-visualization:hover .petal {
+            transform-origin: center center;
+        }
+        
+        .flower-visualization:hover .petal:nth-child(1) { transform: translate(-50%, -50%) rotate(30deg) translateY(-60px); }
+        .flower-visualization:hover .petal:nth-child(2) { transform: translate(-50%, -50%) rotate(90deg) translateY(-60px); }
+        .flower-visualization:hover .petal:nth-child(3) { transform: translate(-50%, -50%) rotate(150deg) translateY(-60px); }
+        .flower-visualization:hover .petal:nth-child(4) { transform: translate(-50%, -50%) rotate(210deg) translateY(-60px); }
+        .flower-visualization:hover .petal:nth-child(5) { transform: translate(-50%, -50%) rotate(270deg) translateY(-60px); }
+        .flower-visualization:hover .petal:nth-child(6) { transform: translate(-50%, -50%) rotate(330deg) translateY(-60px); }
+        
+        /* Timeline visualization */
+        .timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            background-color: var(--primary);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -1px;
+        }
+        
+        .timeline-container {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+        }
+        
+        .timeline-container::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: var(--bg-primary);
+            border: 4px solid var(--primary);
+            border-radius: 50%;
+            top: 15px;
+            z-index: 1;
+        }
+        
+        .left {
+            left: 0;
+        }
+        
+        .right {
+            left: 50%;
+        }
+        
+        .left::after {
+            right: -12px;
+        }
+        
+        .right::after {
+            left: -12px;
+        }
+        
+        .timeline-content {
+            padding: 20px 30px;
+            background-color: var(--bg-primary);
+            position: relative;
+            border-radius: 6px;
+            border-left: 3px solid var(--primary);
+        }
+        
+        @media screen and (max-width: 768px) {
+            .timeline::after {
+                left: 31px;
+            }
+            
+            .timeline-container {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .timeline-container::after {
+                left: 15px;
+            }
+            
+            .left::after, .right::after {
+                left: 15px;
+            }
+            
+            .right {
+                left: 0%;
+            }
+        }
+    </style>
+</head>
+
+<body class="overflow-x-hidden">
+    <!-- Navigation -->
+    <nav class="py-4 px-6 md:px-12 border-b border-custom flex items-center justify-between">
+        <div class="logo relative cursor-pointer flex items-center">
+            <h1 class="text-2xl md:text-3xl font-bold tracking-wider text-primary">KALON FLEUR</h1>
+        </div>
+        
+        <div class="hidden md:flex items-center space-x-8">
+            <a href="#" class="nav-link text-sm tracking-wide">COLLECTIONS</a>
+            <a href="#" class="nav-link text-sm tracking-wide">STORIES</a>
+            <a href="#" class="nav-link text-sm tracking-wide">CUSTOM</a>
+            <a href="#" class="nav-link text-sm tracking-wide">GIFTING GUIDE</a>
+            <a href="#" class="nav-link text-sm tracking-wide">JOURNAL</a>
+        </div>
+        
+        <div class="flex items-center space-x-4">
+            <div class="mode-toggle" id="modeToggle">
+                <div class="mode-toggle-circle"></div>
+            </div>
+            <a href="#" class="hidden md:block"><i class="far fa-heart text-lg"></i></a>
+            <a href="#" class="hidden md:block"><i class="far fa-user text-lg"></i></a>
+            <a href="#" class="hidden md:block"><i class="fas fa-shopping-bag text-lg"></i></a>
+            <button class="md:hidden"><i class="fas fa-bars text-lg"></i></button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero flex items-center justify-center relative">
+        <div class="absolute inset-0 bg-gradient-to-b from-black/40 to-black/60"></div>
+        <div class="relative z-10 text-center px-6 md:px-12 max-w-4xl">
+            <h1 class="text-4xl md:text-6xl lg:text-7xl text-white font-bold leading-tight mb-4">Where Souls Bloom</h1>
+            <p class="text-xl md:text-2xl text-white/90 mb-8">Jewels to Speak the Unspoken</p>
+            <a href="#" class="btn btn-primary ribbon-btn">Explore the Bonds <i class="fas fa-arrow-right ml-2"></i></a>
+        </div>
+    </section>
+
+    <!-- Brand Introduction -->
+    <section class="py-16 md:py-24 px-6 md:px-12 lg:px-24 bg-section">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">Jewelry That Speaks the Unspoken</h2>
+            <p class="text-lg md:text-xl text-secondary mb-8">KALON FLEUR creates timeless pieces that carry the beauty of love, friendship, and self-empowerment.</p>
+            <p class="fancy-first-letter text-base md:text-lg mb-8 text-left">KALON FLEUR is more than a jewelry brand -- it is a bridge between souls. Every piece is designed to express heartfelt emotions and celebrate the beauty within. Through delicate craftsmanship and meaningful design, we help you say what words cannot.</p>
+            <div class="flex justify-center">
+                <a href="#" class="btn btn-secondary mt-4">Discover Our Story</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values Section -->
+    <section class="py-16 md:py-24 px-6 md:px-12 lg:px-24">
+        <h2 class="text-3xl md:text-4xl font-bold text-center mb-16">Our Values</h2>
+        
+        <div class="flex flex-col md:flex-row justify-between space-y-8 md:space-y-0 md:space-x-8">
+            <!-- Value Card 1 -->
+            <div class="value-card flex-1 card p-8 rounded-lg" data-aos="fade-up" data-aos-delay="100">
+                <div class="icon-container bg-light inline-block p-4 rounded-full mb-6 transition-transform duration-300">
+                    <i class="fas fa-heart text-2xl text-primary"></i>
+                </div>
+                <h3 class="value-title text-xl font-bold mb-4 transition-colors duration-300">Emotional Connection</h3>
+                <div class="h-1 w-12 bg-primary mb-4"></div>
+                <p class="mb-4">Jewelry as a vessel for love and friendship.</p>
+                <p class="italic text-secondary">"Two souls, one language of love"</p>
+            </div>
+            
+            <!-- Value Card 2 -->
+            <div class="value-card flex-1 card p-8 rounded-lg" data-aos="fade-up" data-aos-delay="200">
+                <div class="icon-container bg-light inline-block p-4 rounded-full mb-6 transition-transform duration-300">
+                    <i class="fas fa-fire text-2xl text-primary"></i>
+                </div>
+                <h3 class="value-title text-xl font-bold mb-4 transition-colors duration-300">Inner Strength</h3>
+                <div class="h-1 w-12 bg-primary mb-4"></div>
+                <p class="mb-4">A reminder to cherish one's self-worth and potential.</p>
+                <p class="italic text-secondary">"Your light deserves to be seen"</p>
+            </div>
+            
+            <!-- Value Card 3 -->
+            <div class="value-card flex-1 card p-8 rounded-lg" data-aos="fade-up" data-aos-delay="300">
+                <div class="icon-container bg-light inline-block p-4 rounded-full mb-6 transition-transform duration-300">
+                    <i class="fas fa-gem text-2xl text-primary"></i>
+                </div>
+                <h3 class="value-title text-xl font-bold mb-4 transition-colors duration-300">Design Mission</h3>
+                <div class="h-1 w-12 bg-primary mb-4"></div>
+                <p class="mb-4">Delicate craftsmanship that delivers warmth and meaning.</p>
+                <p class="italic text-secondary">"Crafted to carry your story"</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Emotional Connection Visualization -->
+    <section class="py-16 md:py-24 px-6 md:px-12 lg:px-24 bg-section">
+        <div class="max-w-5xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16">The Language of Emotion</h2>
+            
+            <div class="flower-visualization rounded-lg mb-12" data-aos="zoom-in">
+                <div class="petal" style="left: 50%; top: 50%;"></div>
+                <div class="petal" style="left: 50%; top: 50%;"></div>
+                <div class="petal" style="left: 50%; top: 50%;"></div>
+                <div class="petal" style="left: 50%; top: 50%;"></div>
+                <div class="petal" style="left: 50%; top: 50%;"></div>
+                <div class="petal" style="left: 50%; top: 50%;"></div>
+                <div class="flower-center" style="left: 50%; top: 50%;"></div>
+            </div>
+            
+            <div class="text-center mb-12" data-aos="fade-up">
+                <p class="text-lg italic mb-6">"Jewelry becomes a silent language between hearts, expressing what words often cannot."</p>
+                <div class="h-0.5 w-24 bg-primary mx-auto"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center" data-aos="fade-up" data-aos-delay="200">
+                <div>
+                    <div class="rounded-full bg-light inline-flex items-center justify-center w-16 h-16 mb-4">
+                        <i class="fas fa-users text-primary text-xl"></i>
+                    </div>
+                    <h4 class="text-lg font-semibold mb-2">Friendship</h4>
+                    <p>Bonds that transcend distance and time</p>
+                </div>
+                
+                <div>
+                    <div class="rounded-full bg-light inline-flex items-center justify-center w-16 h-16 mb-4">
+                        <i class="fas fa-heart text-primary text-xl"></i>
+                    </div>
+                    <h4 class="text-lg font-semibold mb-2">Love</h4>
+                    <p>Deep connections that define our journey</p>
+                </div>
+                
+                <div>
+                    <div class="rounded-full bg-light inline-flex items-center justify-center w-16 h-16 mb-4">
+                        <i class="fas fa-sun text-primary text-xl"></i>
+                    </div>
+                    <h4 class="text-lg font-semibold mb-2">Self-Worth</h4>
+                    <p>Celebrating the beauty that lies within</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Collection Showcase -->
+    <section class="py-16 md:py-24 px-6 md:px-12 lg:px-24">
+        <h2 class="text-3xl md:text-4xl font-bold text-center mb-6">Collection Showcase</h2>
+        <p class="text-lg text-center max-w-2xl mx-auto mb-16">Explore our carefully crafted collections, each designed to convey a unique emotional meaning.</p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6">
+            <!-- Collection 1: Sisterhood -->
+            <div class="product-card lg:col-span-8 lg:row-span-2 rounded-lg overflow-hidden" data-aos="fade-up">
+                <div class="relative h-full">
+                    <img src="https://images.unsplash.com/photo-1617038220319-276d3cfab638?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80" 
+                         alt="Two women wearing matching necklaces" 
+                         class="w-full h-full object-cover zoom-on-hover">
+                    <div class="product-overlay p-6 text-white text-center">
+                        <h3 class="text-2xl font-bold mb-2">Sisterhood</h3>
+                        <p class="mb-4">"Always my sister"</p>
+                        <p class="italic mb-6 text-sm">"Sent to my college bestie across the ocean"</p>
+                        <a href="#" class="btn btn-primary">Explore Collection</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Collection 2: Love -->
+            <div class="product-card lg:col-span-4 lg:row-span-2 rounded-lg overflow-hidden" data-aos="fade-up" data-aos-delay="100">
+                <div class="relative h-full">
+                    <img src="https://images.unsplash.com/photo-1596944924616-7b38e7cfbfc8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80" 
+                         alt="Couple holding hands with matching bracelets" 
+                         class="w-full h-full object-cover zoom-on-hover">
+                    <div class="product-overlay p-6 text-white text-center">
+                        <h3 class="text-2xl font-bold mb-2">Love</h3>
+                        <p class="mb-4">"Two souls, one heart"</p>
+                        <p class="italic mb-6 text-sm">"The perfect anniversary gift"</p>
+                        <a href="#" class="btn btn-primary">Explore Collection</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Collection 3: Empowerment -->
+            <div class="product-card lg:col-span-6 lg:row-span-2 rounded-lg overflow-hidden" data-aos="fade-up" data-aos-delay="200">
+                <div class="relative h-full">
+                    <img src="https://images.unsplash.com/photo-1601121141461-9d6647bca1ed?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80" 
+                         alt="Woman wearing an empowerment ring" 
+                         class="w-full h-full object-cover zoom-on-hover">
+                    <div class="product-overlay p-6 text-white text-center">
+                        <h3 class="text-2xl font-bold mb-2">Empowerment</h3>
+                        <p class="mb-4">"Your light deserves to be seen"</p>
+                        <p class="italic mb-6 text-sm">"A reminder of my inner strength"</p>
+                        <a href="#" class="btn btn-primary">Explore Collection</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Collection 4: For Mothers -->
+            <div class="product-card lg:col-span-6 lg:row-span-2 rounded-lg overflow-hidden" data-aos="fade-up" data-aos-delay="300">
+                <div class="relative h-full">
+                    <img src="https://images.unsplash.com/photo-1520923642038-b4259acecbd7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80" 
+                         alt="Mother and daughter with matching jewelry" 
+                         class="w-full h-full object-cover zoom-on-hover">
+                    <div class="product-overlay p-6 text-white text-center">
+                        <h3 class="text-2xl font-bold mb-2">For Mothers</h3>
+                        <p class="mb-4">"Forever connected"</p>
+                        <p class="italic mb-6 text-sm">"My mom cried when she read the hidden message"</p>
+                        <a href="#" class="btn btn-primary">Explore Collection</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Customization Module -->
+    <section class="py-16 md:py-24 px-6 md:px-12 lg:px-24 bg-section">
+        <div class="flex flex-col lg:flex-row items-center">
+            <div class="w-full lg:w-1/2 mb-12 lg:mb-0 lg:pr-12" data-aos="fade-right">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6">Create Your Story</h2>
+                <p class="text-lg mb-8">Personalize your piece with engraved initials or words that speak from the heart. See your story take shape in real-time.</p>
+                
+                <div class="mb-6">
+                    <label class="block text-sm font-medium mb-2">Type initials or short phrase:</label>
+                    <input type="text" id="customText" class="custom-input" placeholder="e.g. A&B or Always with you">
+                </div>
+                
+                <div class="mb-6">
+                    <label class="block text-sm font-medium mb-2">Choose your piece:</label>
+                    <div class="grid grid-cols-3 gap-4">
+                        <div class="cursor-pointer bg-white p-3 rounded-lg border border-primary">
+                            <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80" alt="Necklace" class="rounded">
+                            <p class="text-center text-sm mt-2">Necklace</p>
+                        </div>
+                        <div class="cursor-pointer bg-white p-3 rounded-lg border border-gray-200 hover:border-primary">
+                            <img src="https://images.unsplash.com/photo-1598560917505-59a3ad559071?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80" alt="Bracelet" class="rounded">
+                            <p class="text-center text-sm mt-2">Bracelet</p>
+                        </div>
+                        <div class="cursor-pointer bg-white p-3 rounded-lg border border-gray-200 hover:border-primary">
+                            <img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80" alt="Ring" class="rounded">
+                            <p class="text-center text-sm mt-2">Ring</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <a href="#" class="btn btn-primary w-full text-center">Start Your Unspoken Story →</a>
+            </div>
+            
+            <div class="w-full lg:w-1/2 customization-preview rounded-lg flex items-center justify-center" data-aos="fade-left">
+                <div class="relative z-10 bg-white/90 dark:bg-dark/90 p-6 rounded-lg text-center w-4/5">
+                    <p class="text-sm uppercase tracking-wider mb-2">Your personalized piece</p>
+                    <h3 class="text-xl font-bold mb-2" id="previewText">A&B</h3>
+                    <p class="italic text-sm">Engraved on Silver Necklace</p>
+                    <div class="mt-4 flex justify-center">
+                        <div class="bg-primary text-white text-xs py-1 px-3 rounded-full">Preview Only</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Customer Journey Timeline -->
+    <section class="py-16 md:py-24 px-6 md:px-12 lg:px-24">
+        <h2 class="text-3xl md:text-4xl font-bold text-center mb-16">From Emotion to Expression</h2>
+        
+        <div class="timeline">
+            <div class="timeline-container left" data-aos="fade-right">
+                <div class="timeline-content card">
+                    <h3 class="font-bold text-xl mb-2">The Feeling</h3>
+                    <p>Every piece begins with a real emotion - love, gratitude, or self-appreciation.</p>
+                </div>
+            </div>
+            
+            <div class="timeline-container right" data-aos="fade-left">
+                <div class="timeline-content card">
+                    <h3 class="font-bold text-xl mb-2">The Design</h3>
+                    <p>Our artisans transform feelings into delicate designs that capture the essence of your emotion.</p>
+                </div>
+            </div>
+            
+            <div class="timeline-container left" data-aos="fade-right">
+                <div class="timeline-content card">
+                    <h3 class="font-bold text-xl mb-2">The Craftsmanship</h3>
+                    <p>Every detail is carefully handcrafted to ensure your jewelry carries your story with beauty.</p>
+                </div>
+            </div>
+            
+            <div class="timeline-container right" data-aos="fade-left">
+                <div class="timeline-content card">
+                    <h3 class="font-bold text-xl mb-2">The Gift</h3>
+                    <p>Delivered in our signature packaging, ready to create a moment of emotional connection.</p>
+                </div>
+            </div>
+            
+            <div class="timeline-container left" data-aos="fade-right">
+                <div class="timeline-content card">
+                    <h3 class="font-bold text-xl mb-2">The Story Continues</h3>
+                    <p>Your jewelry becomes part of your daily story, a constant reminder of what matters most.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-16 md:py-24 px-6 md:px-12 lg:px-24 bg-section">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16">Stories From Our Community</h2>
+            
+            <div class="carousel-container" data-aos="fade-up">
+                <div class="carousel-slide fade">
+                    <div class="card p-8 rounded-lg text-center">
+                        <div class="mb-6">
+                            <i class="fas fa-quote-left text-4xl text-primary opacity-20"></i>
+                        </div>
+                        <p class="text-lg mb-6">My mom cried when she read the hidden message in the locket. It was the perfect way to tell her how much she means to me when words weren't enough.</p>
+                        <div class="h-16 w-16 rounded-full overflow-hidden mx-auto mb-4">
+                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Sarah M." class="w-full h-full object-cover">
+                        </div>
+                        <p class="font-bold">Sarah M.</p>
+                        <p class="text-sm text-secondary">Gifted the "Forever Connected" Locket</p>
+                    </div>
+                </div>
+                
+                <div class="carousel-slide fade">
+                    <div class="card p-8 rounded-lg text-center">
+                        <div class="mb-6">
+                            <i class="fas fa-quote-left text-4xl text-primary opacity-20"></i>
+                        </div>
+                        <p class="text-lg mb-6">I bought matching bracelets for me and my sister who lives overseas. Now whenever I miss her, I touch my bracelet and feel connected despite the distance.</p>
+                        <div class="h-16 w-16 rounded-full overflow-hidden mx-auto mb-4">
+                            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Emma L." class="w-full h-full object-cover">
+                        </div>
+                        <p class="font-bold">Emma L.</p>
+                        <p class="text-sm text-secondary">Wears the "Soul Sisters" Bracelet</p>
+                    </div>
+                </div>
+                
+                <div class="carousel-slide fade">
+                    <div class="card p-8 rounded-lg text-center">
+                        <div class="mb-6">
+                            <i class="fas fa-quote-left text-4xl text-primary opacity-20"></i>
+                        </div>
+                        <p class="text-lg mb-6">After a difficult year, I bought myself the empowerment ring as a reminder of my inner strength. It's become my daily talisman and confidence boost.</p>
+                        <div class="h-16 w-16 rounded-full overflow-hidden mx-auto mb-4">
+                            <img src="https://randomuser.me/api/portraits/women/90.jpg" alt="Mia T." class="w-full h-full object-cover">
+                        </div>
+                        <p class="font-bold">Mia T.</p>
+                        <p class="text-sm text-secondary">Wears the "Inner Light" Ring</p>
+                    </div>
+                </div>
+                
+                <div class="flex justify-center mt-6">
+                    <span class="dot cursor-pointer h-3 w-3 bg-gray-300 rounded-full mx-1"></span>
+                    <span class="dot cursor-pointer h-3 w-3 bg-gray-300 rounded-full mx-1"></span>
+                    <span class="dot cursor-pointer h-3 w-3 bg-gray-300 rounded-full mx-1"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gift Experience -->
+    <section class="py-16 md:py-24 px-6 md:px-12 lg:px-24">
+        <div class="flex flex-col lg:flex-row items-center">
+            <div class="w-full lg:w-1/2 mb-12 lg:mb-0 order-2 lg:order-1" data-aos="fade-right">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6">The Gift Experience</h2>
+                <p class="text-lg mb-8">Every KALON FLEUR piece arrives in our signature gift box, designed to create a moment of discovery and emotional connection.</p>
+                
+                <div class="mb-6 fancy-first-letter">
+                    <p>Opening a KALON FLEUR gift is an experience in itself. Inside our signature box lies not just jewelry, but a carefully orchestrated moment of emotional connection. The eternal flower symbolizes the lasting nature of true emotions, while your personalized message creates an instant bond. It's more than a gift - it's a memory in the making.</p>
+                </div>
+                
+                <div class="p-5 border-l-4 border-primary bg-light rounded" data-aos="fade-up" data-aos-delay="200">
+                    <p class="italic">"You are my soul's bloom."</p>
+                    <p class="text-sm text-right mt-2">— Example personalized card message</p>
+                </div>
+                
+                <a href="#" class="btn btn-secondary mt-8">Explore Gifting Guide</a>
+            </div>
+            
+            <div class="w-full lg:w-1/2 order-1 lg:order-2" data-aos="fade-left">
+                <img src="https://images.unsplash.com/photo-1511417698458-c36b858a01c8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80" 
+                     alt="KALON FLEUR signature gift box with jewelry and eternal flower" 
+                     class="rounded-lg shadow-xl">
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="py-16 md:py-24 px-6 md:px-12 lg:px-24 bg-primary">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">Join Our Community</h2>
+            <p class="text-white/90 text-lg mb-8">Subscribe to receive stories of emotional connection, exclusive offers, and be the first to discover new collections.</p>
+            
+            <div class="flex flex-col md:flex-row justify-center mb-6">
+                <input type="email" placeholder="Your email address" class="px-4 py-3 rounded-l-md w-full md:w-auto mb-2 md:mb-0">
+                <button class="bg-dark hover:bg-opacity-90 text-white px-6 py-3 rounded-r-md md:rounded-l-none">Let Your Heart Speak →</button>
+            </div>
+            
+            <p class="text-white/70 text-sm">We respect your privacy and will never share your information.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="pt-16 pb-8 px-6 md:px-12 lg:px-24 bg-section">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+            <div>
+                <h3 class="text-xl font-bold mb-4">KALON FLEUR</h3>
+                <p class="mb-4">Jewelry That Speaks the Unspoken</p>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-primary hover:text-accent"><i class="fab fa-instagram text-lg"></i></a>
+                    <a href="#" class="text-primary hover:text-accent"><i class="fab fa-facebook text-lg"></i></a>
+                    <a href="#" class="text-primary hover:text-accent"><i class="fab fa-pinterest text-lg"></i></a>
+                    <a href="#" class="text-primary hover:text-accent"><i class="fab fa-tiktok text-lg"></i></a>
+                </div>
+            </div>
+            
+            <div>
+                <h4 class="font-bold mb-4">Collections</h4>
+                <ul class="space-y-2">
+                    <li><a href="#" class="hover:text-primary">Sisterhood</a></li>
+                    <li><a href="#" class="hover:text-primary">Love</a></li>
+                    <li><a href="#" class="hover:text-primary">Empowerment</a></li>
+                    <li><a href="#" class="hover:text-primary">For Mothers</a></li>
+                    <li><a href="#" class="hover:text-primary">New Arrivals</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h4 class="font-bold mb-4">Help</h4>
+                <ul class="space-y-2">
+                    <li><a href="#" class="hover:text-primary">Contact Us</a></li>
+                    <li><a href="#" class="hover:text-primary">Shipping & Returns</a></li>
+                    <li><a href="#" class="hover:text-primary">Care Guide</a></li>
+                    <li><a href="#" class="hover:text-primary">FAQ</a></li>
+                    <li><a href="#" class="hover:text-primary">Size Guide</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h4 class="font-bold mb-4">About</h4>
+                <ul class="space-y-2">
+                    <li><a href="#" class="hover:text-primary">Our Story</a></li>
+                    <li><a href="#" class="hover:text-primary">Sustainability</a></li>
+                    <li><a href="#" class="hover:text-primary">Artisan Craftsmanship</a></li>
+                    <li><a href="#" class="hover:text-primary">Journal</a></li>
+                    <li><a href="#" class="hover:text-primary">Careers</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="border-t border-custom pt-8 flex flex-col md:flex-row justify-between items-center">
+            <p class="text-sm mb-4 md:mb-0">© 2023 KALON FLEUR. All rights reserved.</p>
+            <div class="flex space-x-6 text-sm">
+                <a href="#" class="hover:text-primary">Privacy Policy</a>
+                <a href="#" class="hover:text-primary">Terms of Service</a>
+                <a href="#" class="hover:text-primary">Cookie Policy</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Dark mode toggle
+        const modeToggle = document.getElementById('modeToggle');
+        
+        // Check system preference
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.body.classList.add('dark');
+        }
+        
+        // Toggle handler
+        modeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark');
+        });
+        
+        // Customization preview update
+        const customText = document.getElementById('customText');
+        const previewText = document.getElementById('previewText');
+        
+        customText.addEventListener('input', () => {
+            previewText.textContent = customText.value || 'A&B';
+        });
+        
+        // Testimonial carousel
+        let slideIndex = 0;
+        showSlides();
+        
+        function showSlides() {
+            let i;
+            let slides = document.getElementsByClassName("carousel-slide");
+            let dots = document.getElementsByClassName("dot");
+            
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            
+            slideIndex++;
+            if (slideIndex > slides.length) {slideIndex = 1}
+            
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" bg-primary", " bg-gray-300");
+            }
+            
+            slides[slideIndex-1].style.display = "block";
+            dots[slideIndex-1].className += " bg-primary";
+            
+            setTimeout(showSlides, 5000); // Change slide every 5 seconds
+        }
+        
+        // Initialize AOS animation library
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true
+        });
+        
+        // Manual carousel navigation
+        const dots = document.getElementsByClassName("dot");
+        for (let i = 0; i < dots.length; i++) {
+            dots[i].addEventListener('click', () => {
+                slideIndex = i;
+                showSlides();
+            });
+        }
+    </script>
+</body>
+</html>
